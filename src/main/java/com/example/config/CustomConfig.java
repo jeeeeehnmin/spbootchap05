@@ -10,6 +10,11 @@ import com.example.domain.DeptVO;
 @Configuration
 public class CustomConfig {
    
+	/*
+	 * bean 어노테이션으로 컨피규레이션으로 등록하면 어디서도 가져다가 쓸 수 있음
+	 * 컨트롤러에서 모델에 속성을 저장하고 뷰 기술로 읽어낸다.
+	 */
+	
    @Bean
    InternalResourceViewResolver jspView() {
       InternalResourceViewResolver vr = new InternalResourceViewResolver();

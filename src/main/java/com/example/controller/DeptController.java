@@ -70,4 +70,12 @@ public class DeptController {
     
     return "thymeleaf/dept/listemp";
   }
+  
+  /*
+   * 유저가 요청한 도메인을 컨트롤러가 미리 매핑해 놓은 주소와 일치하는지 스프링부트가 판단해서 연결시켜주면,
+   * 그때 해당 컨트롤러 클래스의 매핑 주소에 맞는 메소드가 실행되는거야
+   * 그래서 뭐 불러오고 뭐하고 리턴값으로 jsp나, thymeleaf의 파일 위치를 가리키면( Forward )
+   * 웹브라우져에 그 페이지가 뜨게 되는거징
+   */
+  
 }

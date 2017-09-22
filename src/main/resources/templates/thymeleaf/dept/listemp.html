@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>listemp.html</title>
+<!-- \*\ 안에 있는 녀석은 타임리프가 인지하는 CSS이고 아래 라이브 돼 있는 CSS는 data-th-remove="all"이면 content assist를 위한 것 -->
+<!--/*/ 
+<link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.css">
+<link rel="stylesheet" href="/webjars/animate.css/3.5.2/animate.css">
+/*/-->
 <link rel="stylesheet" href="../css/bootstrap.css" data-th-remove="all">
 <link rel="stylesheet" href="../css/animate.css" data-th-remove="all">
 </head>
@@ -12,28 +17,76 @@
 	<div data-th-inline="text">[[${depts}]]</div>
 	<hr>
 	<div data-th-inline="text">
-		<ol>
+		<ul>
 			<li>[[${depts[0].emps}]]</li>
 			<li>[[${depts[1]}]]</li>
 			<li>[[${depts[2]}]]</li>
-		</ol>
+		</ul>
 	</div>
-	
+
 	<hr>
-	<ol>
+	<ul>
 		<li data-th-each="dept : ${depts}">
 			<h3 data-th-text="${dept.deptno} +',' + ${dept.dname}"></h3>
 			<table class="table table-striped animated fadeIn">
+				<tr>
+					<th>empno</th>
+					<th>ename</th>
+					<th>gender1</th>
+					<th>gender2</th>
+					<th>job</th>
+					<th>mgr.name1</th>
+					<th>mgr.name2</th>
+					<th>mgr.name3</th>
+					<th>hiredate1</th>
+					<th>hiredate2</th>
+					<th>salary1</th>
+					<th>salary2</th>
+					<th>income</th>
+				</tr>
 				<tr data-th-each="emp : ${dept.emps}" data-th-inline="text">
 					<td>[[${emp.empno}]]</td>
 					<td>[[${emp.ename}]]</td>
 					<td>[[${emp.gender}]]</td>
+<!-- 					gender가 enum이기 때문에  -->
+					<th:block data-th-switch="${emp.gender.name()}">
+						<td data-th-case="'M'">남자</td>
+						<td data-th-case="'F'">여자</td>
+						<td data-th-case="*">기타</td>
+					</th:block>
+					<!--
+					<th:block data-th-switch="${emp.gender.name()}">
+						<td data-th-case="${emp.gender.M}">남자</td>
+						<td data-th-case="${emp.gender.F}">여자</td>
+					</th:block>
+					 -->
 					<td>[[${emp.job}]]</td>
 					<td>[[${emp.mgr?.ename}]]</td>
+					<td>[[${emp.mgr == null ? 'xxx' : emp.mgr.ename}]]</td>
+
+					<td data-th-if="${emp.mgr eq null}">
+						<div class="btn btn-info animated bounceOutup">없음xxx</div>
+					</td>
+					<td data-th-unless="${emp.mgr eq null}">
+						<div class="btn btn-primary animated fadeInLeft">[[${emp.mgr.ename}]]</div>
+					</td>
+
+					<td>[[${emp.hiredate}]]</td>
+					<td th:text="${#dates.format(emp.hiredate, 'yyyy,MM,dd')}"></td>
+					
+					<td>[[${emp.sal}]]</td>
+					<td th:text="${#numbers.formatInteger(emp.sal, 3, 'COMMA')}"></td>
+
+					<td data-th-if="${emp.comm eq null}">
+						<div>[[${emp.sal}]]</div>
+					</td>
+					<td data-th-unless="${emp.comm eq null}">
+						<div>[[${emp.comm}+${emp.sal}]]</div>
+					</td>
+					
 				</tr>
 			</table>
-
 		</li>
-	</ol>
+	</ul>
 </body>
 </html>
