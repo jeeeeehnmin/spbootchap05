@@ -84,14 +84,13 @@ public class SitemeshConfig {
 				//contentPath를 호출하면 decoratePath를 적용
 				builder.addDecoratorPaths("/bootstrap/*", "/WEB-INF/decorators/grid.jsp");
 //				builder.addDecoratorPaths("/bootstrap/*", "/WEB-INF/decorators/default.jsp");
-//				builder.addDecoratorPaths("/animate/*", "/WEB-INF/decorators/default.jsp");
+				builder.addDecoratorPaths("/animate/*", "/WEB-INF/decorators/default.jsp");
+				builder.addDecoratorPaths("/chart/*", "/WEB-INF/decorators/grid.jsp");
 			}
 		});
 		
-		filter.setUrlPatterns(Arrays.asList("/bootstrap/*", "/animate/*"));
+		filter.setUrlPatterns(Arrays.asList("/bootstrap/*", "/animate/*", "/chart/*"));
 		
 		return filter;
 	}
-	
-	
 }

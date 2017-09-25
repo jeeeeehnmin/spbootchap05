@@ -32,11 +32,11 @@ public class BootStrapController {
 		return "jsp/bootstrap/gridsample";
 	}	
 	
-	@GetMapping("/gridsample")
+	@GetMapping("/gridsample2")
 	public String gridSample2(){
 		
 		log.info("/bootstrap/gridsample2 gridSample2().......");
 		
-		return "thymeleaf/bootstrap/gridsample2";
+		return "thymeleaf/bootstrap/gridsample";
 	}
 }
